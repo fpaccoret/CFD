@@ -8,7 +8,7 @@ FoamFile
 
 // Exported by SnappyHexMesh GUI add-on for Blender v1.8
 // Source file: /Users/fabair/Documents/CFD/flange.blend
-// Export date: 2025-08-28 09:19:53.034413
+// Export date: 2025-08-28 09:43:28.706705
 
 // Details about SnappyHexMesh parameters can be found in annotated caseDicts:
 // - For openfoam.org (development version), see
@@ -184,7 +184,7 @@ addLayersControls
     nMedialAxisIter 1000;
 
     // Medial axis analysis
-    minMedialAxisAngle 90;
+    minMedianAxisAngle 90;
     maxThicknessToMedialRatio 0.5;
     slipFeatureAngle 30;
     nRelaxIter 10;

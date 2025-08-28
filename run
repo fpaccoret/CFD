@@ -17,7 +17,7 @@ function run_and_log(){
 }
 
 run_and_log blockMesh blockMesh
-run_and_log surfaceFeatureExtract surfaceFeatureExtract
+run_and_log surfaceFeatures surfaceFeatures
 run_and_log snappyHexMesh snappyHexMesh
 run_and_log checkMesh checkMesh -latestTime
 # run_and_log postProcess postProcess -time '1:'

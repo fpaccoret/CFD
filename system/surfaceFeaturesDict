@@ -1,0 +1,26 @@
+FoamFile
+{
+    version         2;
+    format          ascii;
+    class           dictionary;
+    object          surfaceFeaturesDict;
+}
+
+// Exported by SnappyHexMesh GUI add-on for Blender v1.8
+// Source file: /Users/fabair/Documents/CFD/flange.blend
+// Export date: 2025-08-28 09:43:28.705261
+
+
+
+surfaces
+(
+    "inlet.001.stl"
+    "outlet.001.stl"
+    "sidelet.001.stl"
+    "wall.stl"
+);
+
+includedAngle 150;
+writeObj yes;
+
+
