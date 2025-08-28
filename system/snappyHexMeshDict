@@ -8,7 +8,7 @@ FoamFile
 
 // Exported by SnappyHexMesh GUI add-on for Blender v1.8
 // Source file: /Users/fabair/Documents/CFD/flange.blend
-// Export date: 2025-08-28 09:54:01.719964
+// Export date: 2025-08-28 15:33:48.702514
 
 // Details about SnappyHexMesh parameters can be found in annotated caseDicts:
 // - For openfoam.org (development version), see
@@ -42,6 +42,14 @@ geometry
         // Min Bounds = [-7.04900e-03  2.25000e-02 -1.62500e-02]
         // Max Bounds = [ 7.04900e-03  2.25000e-02 -2.25000e-03]
         // Area = 1.54489e-04
+    }
+    refinement
+    {
+        type triSurfaceMesh;
+        file "refinement.stl";
+        // Min Bounds = [-4.59816e-03 -4.90138e-03 -1.40020e-02]
+        // Max Bounds = [ 4.67814e-03  4.37492e-03 -4.72568e-03]
+        // Area = 4.04198e-04
     }
     sidelet.001
     {
@@ -86,6 +94,10 @@ castellatedMeshControls
             level 0;
         }
         {
+            file "refinement.eMesh";
+            level 0;
+        }
+        {
             file "sidelet.001.eMesh";
             level 0;
         }
@@ -105,6 +117,12 @@ castellatedMeshControls
             addBufferLayers false;
         }
         outlet.001
+        {
+            level (0 0);
+            patchInfo { type patch; }
+            addBufferLayers false;
+        }
+        refinement
         {
             level (0 0);
             patchInfo { type patch; }
