@@ -1,0 +1,231 @@
+FoamFile
+{
+    version         2;
+    format          ascii;
+    class           dictionary;
+    object          snappyHexMeshDict;
+}
+
+// Exported by SnappyHexMesh GUI add-on for Blender v1.8
+// Source file: /Users/fabair/Documents/CFD/flange.blend
+// Export date: 2025-08-28 09:19:53.034413
+
+// Details about SnappyHexMesh parameters can be found in annotated caseDicts:
+// - For openfoam.org (development version), see
+//   https://github.com/OpenFOAM/OpenFOAM-dev/blob/master/etc/caseDicts/annotated/snappyHexMeshDict
+// - For openfoam.com (development version), see
+//   https://develop.openfoam.com/Development/openfoam/-/blob/master/etc/caseDicts/annotated/snappyHexMeshDict
+// See also links in https://openfoamwiki.net/index.php/SnappyHexMesh
+
+// type            castellatedBufferLayer; // OpenFOAM.com v2412 option to enable buffer layer. Warning: Experimental feature!
+
+castellatedMesh true;
+snap            true;
+addLayers       false;
+
+mergePatchFaces false;  // Avoid face merging to increase layer coverage
+
+geometry
+{
+    inlet.001
+    {
+        type triSurfaceMesh;
+        file "inlet.001.stl";
+        // Min Bounds = [-2.49896e-03 -2.75000e-02 -1.17000e-02]
+        // Max Bounds = [ 2.49896e-03 -2.75000e-02 -6.80000e-03]
+        // Area = 1.88329e-05
+    }
+    outlet.001
+    {
+        type triSurfaceMesh;
+        file "outlet.001.stl";
+        // Min Bounds = [-7.04900e-03  2.25000e-02 -1.62500e-02]
+        // Max Bounds = [ 7.04900e-03  2.25000e-02 -2.25000e-03]
+        // Area = 1.54489e-04
+    }
+    sidelet.001
+    {
+        type triSurfaceMesh;
+        file "sidelet.001.stl";
+        // Min Bounds = [-4.54900e-03 -4.50000e-03 -2.37500e-02]
+        // Max Bounds = [ 4.54900e-03  4.50000e-03 -2.37500e-02]
+        // Area = 6.37488e-05
+    }
+    wall
+    {
+        type triSurfaceMesh;
+        file "wall.stl";
+        // Min Bounds = [-2.60093e-02 -2.75000e-02 -2.37500e-02]
+        // Max Bounds = [ 2.60093e-02  2.25000e-02  2.25014e-03]
+        // Area = 7.30322e-03
+    }
+}
+
+castellatedMeshControls
+{
+    maxLocalCells   100000;
+    maxGlobalCells  10000000;
+    minRefinementCells 10;
+    maxLoadUnbalance 0.1;
+    nCellsBetweenLevels 4;
+    locationInMesh (0.0 -0.0036851558834314346 -0.010259999893605709);
+    allowFreeStandingZoneFaces true;
+    resolveFeatureAngle 30;
+    // useLeakClosure true; // OpenFOAM.com option
+    handleSnapProblems true;
+    useTopologicalSnapDetection true;
+
+    features
+    (
+        {
+            file "inlet.001.eMesh";
+            level 0;
+        }
+        {
+            file "outlet.001.eMesh";
+            level 0;
+        }
+        {
+            file "sidelet.001.eMesh";
+            level 0;
+        }
+        {
+            file "wall.eMesh";
+            level 0;
+        }
+
+    );
+
+    refinementSurfaces
+    {
+        inlet.001
+        {
+            level (0 0);
+            patchInfo { type patch; }
+            addBufferLayers false;
+        }
+        outlet.001
+        {
+            level (0 0);
+            patchInfo { type patch; }
+            addBufferLayers false;
+        }
+        sidelet.001
+        {
+            level (0 0);
+            patchInfo { type patch; }
+            addBufferLayers false;
+        }
+        wall
+        {
+            level (0 0);
+            patchInfo { type wall; }
+            addBufferLayers false;
+        }
+
+    }
+
+    refinementRegions
+    {
+
+    }
+}
+
+snapControls
+{
+    nSmoothPatch 2;
+    nSmoothInternal 1; // OpenFOAM.com option
+    tolerance 2.0;
+    nSolveIter 4;
+    nRelaxIter 5;
+    nFeatureSnapIter 3;
+    implicitFeatureSnap false;
+    explicitFeatureSnap true;
+    multiRegionFeatureSnap true;
+    nFaceSplitInterval -1; // OpenFOAM.com option
+    releasePoints false;  // multi-region related option
+    stringFeatures true;
+    avoidDiagonal false;
+    strictRegionSnap false;
+    concaveAngle 45;
+    minAreaRatio 0.3;
+
+    // OpenFOAM.com v2412 buffer layer smoothing
+    solver displacementPointSmoothing;
+    displacementPointSmoothingCoeffs
+    {
+        pointSmoother           laplacian;
+        nPointSmootherIter      10;
+    }
+
+}
+
+addLayersControls
+{
+    // Layer sizing
+    relativeSizes true;
+    expansionRatio 1.3;
+    finalLayerThickness 0.6;
+    minThickness 0.001;
+    nGrow 0;
+
+    // Mesh dependencies
+    featureAngle 85;
+    mergePatchFacesAngle 45; // OpenFOAM.com option
+    layerTerminationAngle 45; // OpenFOAM.com option
+    maxFaceThicknessRatio 0.5;
+    disableWallEdges false;
+
+    // Mesh displacement iterations
+    nSmoothSurfaceNormals 8;
+    nSmoothThickness 2;
+    nSmoothNormals 0;
+    nSmoothDisplacement 12;
+    nMedialAxisIter 1000;
+
+    // Medial axis analysis
+    minMedialAxisAngle 90;
+    maxThicknessToMedialRatio 0.5;
+    slipFeatureAngle 30;
+    nRelaxIter 10;
+
+    // OpenFOAM.com displacement motion solver
+    // meshShrinker displacementMotionSolver;
+    // solver displacementLaplacian;
+    // displacementLaplacianCoeffs { diffusivity quadratic inverseDistance ("wall.*"); }
+
+    // Mesh shrinking overall settings
+    nBufferCellsNoExtrude 0;
+    nLayerIter 8;
+    nRelaxedIter 0;
+    nOuterIter 1000; // OpenFOAM.com option, 1=single pass layer addition
+    additionalReporting true;
+
+    // OpenFOAM.com v2412 boundary layer smoothing
+    solver displacementPointSmoothing;
+    displacementPointSmoothingCoeffs
+    {
+        //pointSmoother           geometricElementTransform;
+        //transformationParameter 0.667;
+        //nPointSmootherIter      10;
+
+        pointSmoother           laplacian;
+        nPointSmootherIter      100;
+    }
+
+    layers
+    {
+
+    }
+}
+
+meshQualityControls
+{
+    nSmoothScale    4;
+    errorReduction  0.75;
+    #include "meshQualityDict"
+}
+
+writeFlags      ( scalarLevels layerSets layerFields );
+
+mergeTolerance  1e-06;

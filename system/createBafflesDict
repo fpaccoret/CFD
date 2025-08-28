@@ -1,0 +1,17 @@
+FoamFile
+{
+    format      ascii;
+    class       dictionary;
+    object      createBafflesDict;
+}
+
+// Exported by SnappyHexMesh GUI add-on for Blender v1.8
+// Source file: /Users/fabair/Documents/CFD/flange.blend
+// Export date: 2025-08-28 09:19:53.033443
+
+internalFacesOnly true;
+
+baffles
+{
+
+}
